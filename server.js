@@ -15,15 +15,15 @@ app.get('/api/products', async (req, res) => {
 });
 
 app.post('/api/products', async (req, res) => {
-    const { name, quantity, price } = req.body;
-    await db.addProduct(name, quantity, price);
+    const { name, quantity, price, sector } = req.body;
+    await db.addProduct(name, quantity, price, sector);
     res.json({ message: 'Producto agregado' });
 });
 
 app.put('/api/products/:id', async (req, res) => {
     const { id } = req.params;
-    const { name, quantity, price } = req.body;
-    await db.updateProduct(id, name, quantity, price);
+    const { name, quantity, price, sector } = req.body;
+    await db.updateProduct(id, name, quantity, price, sector);
     res.json({ message: 'Producto actualizado' });
 });
 

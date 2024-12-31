@@ -10,7 +10,7 @@ async function loadProducts() {
         const div = document.createElement('div');
         div.className = 'product-item';
         div.innerHTML = `
-            <span>${product.name} - Cantidad: ${product.quantity} - Precio: $${product.price}</span>
+            <span>${product.name} - Cantidad: ${product.quantity} - Precio: $${product.price} - Sector: ${product.sector}</span>
             <button onclick="deleteProduct(${product.id})">Eliminar</button>
         `;
         productsDiv.appendChild(div);
@@ -23,10 +23,11 @@ productForm.addEventListener('submit', async (e) => {
     const name = document.getElementById('name').value;
     const quantity = document.getElementById('quantity').value;
     const price = document.getElementById('price').value;
+    const sector = document.getElementById('sector').value;
     await fetch('/api/products', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, quantity, price }),
+        body: JSON.stringify({ name, quantity, price, sector }),
     });
     productForm.reset();
     loadProducts();

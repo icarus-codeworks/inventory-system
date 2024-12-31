@@ -9,7 +9,8 @@ db.serialize(() => {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             quantity INTEGER NOT NULL,
-            price REAL NOT NULL
+            price REAL NOT NULL,
+            sector TEXT NOT NULL
         )
     `);
 });
@@ -23,17 +24,17 @@ module.exports = {
             });
         });
     },
-    addProduct: (name, quantity, price) => {
+    addProduct: (name, quantity, price, sector) => {
         return new Promise((resolve, reject) => {
-            db.run('INSERT INTO products (name, quantity, price) VALUES (?, ?, ?)', [name, quantity, price], (err) => {
+            db.run('INSERT INTO products (name, quantity, price, sector) VALUES (?, ?, ?, ?)', [name, quantity, price, sector], (err) => {
                 if (err) reject(err);
                 resolve();
             });
         });
     },
-    updateProduct: (id, name, quantity, price) => {
+    updateProduct: (id, name, quantity, price, sector) => {
         return new Promise((resolve, reject) => {
-            db.run('UPDATE products SET name = ?, quantity = ?, price = ? WHERE id = ?', [name, quantity, price, id], (err) => {
+            db.run('UPDATE products SET name = ?, quantity = ?, price = ? WHERE id = ?, sector = ?', [name, quantity, price, id, sector], (err) => {
                 if (err) reject(err);
                 resolve();
             });
